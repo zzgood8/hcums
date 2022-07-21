@@ -1,7 +1,10 @@
 package com.zbx.hcums.system.dao;
 
 import com.zbx.hcums.system.entity.po.PermissionPo;
+import com.zbx.hcums.system.entity.vo.PermissionVo;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
 * @author Administrator
@@ -12,16 +15,16 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface PermissionMapper {
 
-    int deleteByPrimaryKey(Long id);
+    PermissionPo selectById(Long id);
+
+    List<PermissionPo> selectAll();
+
+    List<PermissionVo> selectAllByTree();
 
     int insert(PermissionPo record);
 
-    int insertSelective(PermissionPo record);
+    int updateNameAndPathById(PermissionPo record);
 
-    PermissionPo selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(PermissionPo record);
-
-    int updateByPrimaryKey(PermissionPo record);
+    int deleteById(Long id);
 
 }
