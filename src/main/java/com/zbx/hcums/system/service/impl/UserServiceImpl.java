@@ -24,11 +24,6 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public List<UserVo> getAllUsers() {
-        return  userMapper
-    }
-
-    @Override
     public List<UserVo> getByParams(UserGetForm userGetForm) {
         return userMapper.selectByParams(userGetForm);
     }

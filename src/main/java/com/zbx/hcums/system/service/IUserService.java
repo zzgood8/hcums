@@ -13,7 +13,5 @@ import java.util.List;
  **/
 public interface IUserService {
 
-    List<UserVo> getAllUsers();
-
     List<UserVo> getByParams(UserGetForm userGetForm);
 }
