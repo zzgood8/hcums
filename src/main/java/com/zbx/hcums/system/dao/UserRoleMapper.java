@@ -2,6 +2,7 @@ package com.zbx.hcums.system.dao;
 
 import com.zbx.hcums.system.entity.po.UserRolePo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
 * @author Administrator
@@ -12,16 +13,31 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserRoleMapper {
 
-    int deleteByPrimaryKey(Long id);
+    /**
+     * 判断当前用户角色是否已存在
+     * @param userId
+     * @param roleId
+     * @return
+     */
+    boolean exists(@Param("userId") Long userId, @Param("roleId") Long roleId);
 
-    int insert(UserRolePo record);
+    /**
+     * 删除用户的一个角色
+     * @param userId
+     * @param roleId
+     */
+    void deleteUserRole(@Param("userId") Long userId, @Param("roleId") Long roleId);
 
-    int insertSelective(UserRolePo record);
+    /**
+     * 删除所有用户的某个角色
+     * @param roleId
+     */
+    void deleteByRole(@Param("roleId") Long roleId);
 
-    UserRolePo selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(UserRolePo record);
-
-    int updateByPrimaryKey(UserRolePo record);
+    /**
+     * 给用户添加一个角色
+     * @param record
+     */
+    void insert(UserRolePo record);
 
 }

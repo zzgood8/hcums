@@ -15,16 +15,16 @@ import java.util.List;
 @Mapper
 public interface PermissionMapper {
 
-    PermissionPo selectById(Long id);
+    boolean exists(Long id);
 
     List<PermissionPo> selectAll();
 
     List<PermissionVo> selectAllByTree();
 
-    int insert(PermissionPo record);
+    void insert(PermissionPo record);
 
-    int updateNameAndPathById(PermissionPo record);
+    void updateNameAndPathById(PermissionPo record);
 
-    int deleteById(Long id);
+    void deleteById(Long id);
 
 }

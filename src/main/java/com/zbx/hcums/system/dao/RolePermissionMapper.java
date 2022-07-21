@@ -2,6 +2,7 @@ package com.zbx.hcums.system.dao;
 
 import com.zbx.hcums.system.entity.po.RolePermissionPo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
 * @author Administrator
@@ -12,16 +13,12 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface RolePermissionMapper {
 
-    int deleteByPrimaryKey(Long id);
+    boolean exists(@Param("roleId") Long roleId, @Param("PermissionId") Long permissionId);
 
-    int insert(RolePermissionPo record);
+    void insert(RolePermissionPo record);
 
-    int insertSelective(RolePermissionPo record);
+    void delete(@Param("roleId") Long roleId, @Param("PermissionId") Long permissionId);
 
-    RolePermissionPo selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(RolePermissionPo record);
-
-    int updateByPrimaryKey(RolePermissionPo record);
+    void deleteByPermissionId(Long permissionId);
 
 }

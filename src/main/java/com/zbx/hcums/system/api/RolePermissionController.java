@@ -1,6 +1,9 @@
 package com.zbx.hcums.system.api;
 
 import com.zbx.hcums.common.res.Result;
+import com.zbx.hcums.system.entity.form.RolePermissionForm;
+import com.zbx.hcums.system.service.IRolePermissionService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -12,24 +15,22 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/system/rolePermission")
 public class RolePermissionController {
 
-    @GetMapping
-    public Result<?> get() {
-        return Result.failed();
+    private final IRolePermissionService rolePermissionService;
+
+    RolePermissionController(IRolePermissionService rolePermissionService) {
+        this.rolePermissionService = rolePermissionService;
     }
 
     @PostMapping
-    public Result<?> post() {
-        return Result.failed();
-    }
-
-    @PutMapping
-    public Result<?> put() {
-        return Result.failed();
+    public Result<?> post(@Validated @RequestBody RolePermissionForm params) {
+        rolePermissionService.addOne(params.getRoleId(), params.getPermissionId());
+        return Result.success();
     }
 
     @DeleteMapping
-    public Result<?> delete() {
-        return Result.failed();
+    public Result<?> delete(@Validated @RequestBody RolePermissionForm params) {
+        rolePermissionService.removeOne(params.getRoleId(), params.getPermissionId());
+        return Result.success();
     }
 
 }

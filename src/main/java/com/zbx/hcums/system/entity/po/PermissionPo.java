@@ -28,7 +28,7 @@ public class PermissionPo implements Serializable {
     /**
      * 是否菜单权限
      */
-    private Integer isMenu;
+    private Boolean isMenu;
 
     /**
      * 权限父类

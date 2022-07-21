@@ -31,8 +31,6 @@ public class PermissionController {
 
     /**
      * 通过参数获取权限列表
-     * @param permissionGetForm
-     * @return
      */
     @GetMapping
     public Result<List<PermissionPo>> get(PermissionGetForm permissionGetForm) {
@@ -42,8 +40,6 @@ public class PermissionController {
 
     /**
      * 新增权限信息
-     * @param permissionPostForm
-     * @return
      */
     @PostMapping
     public Result<?> post(PermissionPostForm permissionPostForm) {
@@ -56,8 +52,6 @@ public class PermissionController {
 
     /**
      * 修改权限信息
-     * @param permissionPutForm
-     * @return
      */
     @PutMapping
     public Result<?> put(PermissionPutForm permissionPutForm) {
@@ -70,8 +64,6 @@ public class PermissionController {
 
     /**
      * 删除一个权限
-     * @param permissionDelForm
-     * @return
      */
     @DeleteMapping
     public Result<?> delete(@Validated PermissionDelForm permissionDelForm) {

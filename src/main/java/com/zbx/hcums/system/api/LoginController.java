@@ -33,4 +33,5 @@ public class LoginController {
         String login = loginService.login(loginForm.getUsername(), loginForm.getPassword());
         return Result.success(login);
     }
+
 }

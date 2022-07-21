@@ -6,4 +6,11 @@ package com.zbx.hcums.system.service;
  * @describe
  **/
 public interface IUserRoleService {
+
+    void addOne(Long userId, Long roleId);
+
+    void removeOne(Long userId, Long roleId);
+
+    void removeByRoleId(Long roleId);
+
 }

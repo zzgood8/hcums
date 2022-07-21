@@ -34,12 +34,6 @@
         is_menu,parent_id,create_time,
         create_by,update_time,update_by
     </sql>
-    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from A_permission
-        where id = #{id,jdbcType=BIGINT}
-    </select>
     <select id="selectAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -58,6 +52,9 @@
         <include refid="Base_Column_List"/>
         from A_permission
         where parent_id = 0
+    </select>
+    <select id="exists" resultType="java.lang.Boolean">
+        select id from A_permission where id = #{id}
     </select>
 
     <delete id="deleteById" parameterType="java.lang.Long">
