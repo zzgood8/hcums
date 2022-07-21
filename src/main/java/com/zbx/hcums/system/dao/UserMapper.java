@@ -17,20 +17,16 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    int deleteByPrimaryKey(Long id);
-
-    int insert(UserPo record);
-
-    int insertSelective(UserPo record);
-
-    UserPo selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(UserPo record);
-
-    int updateByPrimaryKey(UserPo record);
+    UserPo selectById(Long id);
 
     UserPo selectByUsername(String username);
 
     List<UserVo> selectByParams(UserGetForm params);
+
+    int deleteById(Long id);
+
+    int insert(UserPo record);
+
+    int updateById(UserPo record);
 
 }

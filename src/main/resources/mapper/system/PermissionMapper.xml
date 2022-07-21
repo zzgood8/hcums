@@ -85,7 +85,7 @@
                 path = #{path,jdbcType=VARCHAR},
             </if>
             update_time = #{updateTime,jdbcType=TIMESTAMP},
-            update_by = #{updateBy,jdbcType=VARCHAR},
+            update_by = #{updateBy,jdbcType=VARCHAR}
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>

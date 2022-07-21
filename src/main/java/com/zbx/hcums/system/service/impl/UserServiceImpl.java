@@ -6,6 +6,7 @@ import com.zbx.hcums.system.entity.po.UserPo;
 import com.zbx.hcums.system.entity.vo.UserVo;
 import com.zbx.hcums.system.service.IUserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

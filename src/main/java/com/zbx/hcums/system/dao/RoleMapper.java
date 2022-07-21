@@ -12,16 +12,11 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface RoleMapper {
 
-    int deleteByPrimaryKey(Long id);
+    RolePo selectById(Long id);
 
     int insert(RolePo record);
 
-    int insertSelective(RolePo record);
+    int updateById(RolePo record);
 
-    RolePo selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(RolePo record);
-
-    int updateByPrimaryKey(RolePo record);
-
+    int deleteById(Long id);
 }
