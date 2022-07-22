@@ -7,9 +7,8 @@ package com.zbx.hcums.system.service;
  **/
 public interface IUserPermissionService {
 
-    void addOne(Long userId, Long PermissionId);
+    void addOne(Long userId, Long permissionId);
 
-    void removeOne(Long userId, Long PermissionId);
+    void removeOne(Long userId, Long permissionId);
 
-    void removeByPermissionId(Long PermissionId);
 }

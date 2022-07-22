@@ -9,4 +9,6 @@ import lombok.Data;
  **/
 @Data
 public class RoleDelForm {
+
+    private Long roleId;
 }

@@ -21,4 +21,6 @@ public interface RolePermissionMapper {
 
     void deleteByPermissionId(Long permissionId);
 
+    void deleteByRoleId(Long roleId);
+
 }

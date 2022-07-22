@@ -15,7 +15,10 @@ public enum CommonStatusCode implements IStatusCode{
     USER_NOT_EXISTS(40001, "用户不存在"),
     USER_LOCKED(40002, "用户已被锁定"),
     PASSWORD_ERROR(40003, "登录密码错误"),
-    PARAM_ERROR(40004, "参数错误");
+    PARAM_ERROR(40004, "参数错误"),
+    USER_IS_EXISTS(40004, "用户已经存在"),
+    ROLE_IS_EXISTS(40005,"角色已存在"),
+    PERMISSION_IS_EXISTS(40005,"权限已存在");
 
     private final int code;
     private final String msg;

@@ -5,7 +5,11 @@ import com.zbx.hcums.system.entity.form.RoleDelForm;
 import com.zbx.hcums.system.entity.form.RoleGetForm;
 import com.zbx.hcums.system.entity.form.RolePostForm;
 import com.zbx.hcums.system.entity.form.RolePutForm;
+import com.zbx.hcums.system.entity.po.RolePo;
+import com.zbx.hcums.system.service.IRoleService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author zbx
@@ -16,29 +20,37 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/system/role")
 public class RoleController {
 
+    private final IRoleService roleService;
+
+    RoleController(IRoleService roleService) {
+        this.roleService = roleService;
+    }
+
     /**
      * 获取角色列表
-     * @param roleGetForm
-     * @return
      */
     @GetMapping
-    public Result<?> get(RoleGetForm roleGetForm) {
-        return Result.failed();
+    public Result<List<RolePo>> get(RoleGetForm roleGetForm) {
+        List<RolePo> allRoles = roleService.getAllRoles();
+        return Result.success(allRoles);
     }
 
     @PostMapping
     public Result<?> post(RolePostForm rolePostForm) {
-        return Result.failed();
+        roleService.insert(rolePostForm);
+        return Result.success();
     }
 
     @PutMapping
     public Result<?> put(RolePutForm rolePutForm) {
-        return Result.failed();
+        roleService.update(rolePutForm);
+        return Result.success();
     }
 
     @DeleteMapping
     public Result<?> delete(RoleDelForm roleDelForm) {
-        return Result.failed();
+        roleService.deleteById(roleDelForm.getRoleId());
+        return Result.success();
     }
 
 }

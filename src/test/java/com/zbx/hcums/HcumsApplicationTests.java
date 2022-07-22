@@ -9,13 +9,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class HcumsApplicationTests {
 
-    @Autowired
-    UserMapper userMapper;
 
     @Test
     void contextLoads() {
-        UserPo userPo = userMapper.selectByPrimaryKey(1L);
-        System.out.println(userPo);
+
     }
 
 }

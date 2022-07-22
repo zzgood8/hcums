@@ -25,6 +25,15 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
 
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from A_role
+    </select>
+    <select id="exists" resultType="java.lang.Boolean">
+        select exists(select id from A_role where name = #{roleName})
+    </select>
+
     <delete id="deleteById" parameterType="java.lang.Long">
         delete
         from A_role

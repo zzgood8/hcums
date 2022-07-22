@@ -1,6 +1,8 @@
 package com.zbx.hcums.system.api;
 
 import com.zbx.hcums.common.res.Result;
+import com.zbx.hcums.system.entity.form.UserRoleForm;
+import com.zbx.hcums.system.service.IUserRoleService;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -12,23 +14,21 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/system/userRole")
 public class UserRoleController {
 
-    @GetMapping
-    public Result<?> get() {
-        return Result.failed();
+    private final IUserRoleService userRoleService;
+
+    UserRoleController(IUserRoleService userRoleService) {
+        this.userRoleService = userRoleService;
     }
 
     @PostMapping
-    public Result<?> post() {
-        return Result.failed();
-    }
-
-    @PutMapping
-    public Result<?> put() {
-        return Result.failed();
+    public Result<?> post(UserRoleForm userRoleForm) {
+        userRoleService.addOne(userRoleForm.getUserId(), userRoleForm.getRoleId());
+        return Result.success();
     }
 
     @DeleteMapping
-    public Result<?> delete() {
-        return Result.failed();
+    public Result<?> delete(UserRoleForm userRoleForm) {
+        userRoleService.removeOne(userRoleForm.getUserId(), userRoleForm.getRoleId());
+        return Result.success();
     }
 }

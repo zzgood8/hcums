@@ -18,7 +18,7 @@ spring:
         imes:
           url: jdbc:sqlserver://172.16.30.254:1433;database=IMES_royal
           username: zbx
-          passwrod: abc.123
+          password: abc.123
           driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 # SaToken 权限认证配置
 sa-token:

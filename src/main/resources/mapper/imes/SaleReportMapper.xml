@@ -2,114 +2,101 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zbx.hcums.system.dao.PermissionMapper">
+<mapper namespace="com.zbx.hcums.imes.dao.SaleReportMapper">
 
+    <resultMap id="BaseMap" type="com.zbx.hcums.imes.entity.vo.SaleReportVo">
+        <result property="key" column="keys"/>
+        <result property="value" column="value"/>
+    </resultMap>
 
-<!--    <select id="regionalSalesRanking">-->
-<!--        &#45;&#45; 上月区域销售排名-->
-<!--        select amt.Name          区域,-->
-<!--               sum(ActualAmount) 销售额-->
-<!--        from C_Order o-->
-<!--                 left join C_Dealer d on o.DealerId = d.Id-->
-<!--                 left join C_AreaManagerType amt on d.AreaManagerTypeId = amt.Id-->
-<!--        where year(PlanAcceptedDateTime) = year(getdate())-->
-<!--          and month(PlanAcceptedDateTime) = month(dateadd(mm, -1, getdate()))-->
-<!--        group by amt.Name-->
-<!--        order by sum(ActualAmount) desc;-->
-<!--    </select>-->
+    <select id="regionalSale" resultMap="BaseMap">
+        select amt.Name          keys,
+               sum(ActualAmount) value
+        from C_Order o
+                 left join C_Dealer d on o.DealerId = d.Id
+                 left join C_AreaManagerType amt on d.AreaManagerTypeId = amt.Id
+        where year(PlanAcceptedDateTime) = year(getdate())
+          and month(PlanAcceptedDateTime) = month(dateadd(mm, -1, getdate()))
+        group by amt.Name
+        order by sum(ActualAmount) desc;
+    </select>
 
-<!--    <select id="Province Sales">-->
-<!--        &#45;&#45; 上月省份销售额-->
-<!--        select p.Name            省份,-->
-<!--               sum(ActualAmount) 销售额-->
-<!--        from C_Order o-->
-<!--                 left join C_Dealer d on o.DealerId = d.Id-->
-<!--                 left join A_Province p on d.ProvinceId = p.Id-->
-<!--        where year(PlanAcceptedDateTime) = year(getdate())-->
-<!--          and month(PlanAcceptedDateTime) = month(dateadd(mm, -1, getdate()))-->
-<!--        group by p.Name;-->
-<!--    </select>-->
+    <select id="provinceSale" resultMap="BaseMap">
+        -- 上月省份销售额
+        select p.Name            keys,
+               sum(ActualAmount) value
+        from C_Order o
+                 left join C_Dealer d on o.DealerId = d.Id
+                 left join A_Province p on d.ProvinceId = p.Id
+        where year(PlanAcceptedDateTime) = year(getdate())
+          and month(PlanAcceptedDateTime) = month(dateadd(mm, -1, getdate()))
+        group by p.Name;
+    </select>
 
-<!--    <select id="lastMonthSale">-->
-<!--        &#45;&#45; 上月销售额-->
-<!--        select sum(ActualAmount) 销售额-->
-<!--        from C_Order o-->
-<!--        where year(PlanAcceptedDateTime) = year(getdate())-->
-<!--          and month(PlanAcceptedDateTime) = month(dateadd(mm, -1, getdate()));-->
-<!--    </select>-->
+    <select id="lastMonthSale" resultMap="BaseMap">
+        -- 上月销售额
+        select N'上月'             keys,
+               sum(ActualAmount) value
+        from C_Order o
+        where year(PlanAcceptedDateTime) = year(getdate())
+          and month(PlanAcceptedDateTime) = month(dateadd(mm, -1, getdate()));
+    </select>
 
-<!--    <select id="thisMonthSale">-->
-<!--        &#45;&#45; 本月销售额-->
-<!--        select sum(ActualAmount) 销售额-->
-<!--        from C_Order o-->
-<!--        where year(PlanAcceptedDateTime) = year(getdate())-->
-<!--          and month(PlanAcceptedDateTime) = month(getdate());-->
-<!--    </select>-->
+    <select id="thisMonthSale" resultMap="BaseMap">
+        -- 本月销售额
+        select N'本月'             keys,
+               sum(ActualAmount) value
+        from C_Order o
+        where year(PlanAcceptedDateTime) = year(getdate())
+          and month(PlanAcceptedDateTime) = month(getdate());
+    </select>
 
-<!--    <select id="thisYearSale">-->
-<!--        &#45;&#45; 今年销售额-->
-<!--        select sum(ActualAmount) 销售额-->
-<!--        from C_Order o-->
-<!--        where year(PlanAcceptedDateTime) = year(getdate());-->
-<!--    </select>-->
+    <select id="thisYearSale" resultMap="BaseMap">
+        -- 今年销售额
+        select N'今年'             keys,
+               sum(ActualAmount) value
+        from C_Order o
+        where year(PlanAcceptedDateTime) = year(getdate());
+    </select>
 
-<!--    <select id="todaySale">-->
+    <select id="todaySale" resultMap="BaseMap">
+        -- 今日销售额
+        select N'今日'             keys,
+               sum(ActualAmount) value
+        from C_Order o
+        where PlanAcceptedDateTime >= CONVERT(varchar(100), GETDATE(), 23);
+    </select>
 
-<!--        &#45;&#45; 今日销售额-->
-<!--        select sum(ActualAmount) 销售额-->
-<!--        from C_Order o-->
-<!--        where PlanAcceptedDateTime >= CONVERT(varchar (100), GETDATE(), 23);-->
-<!--    </select>-->
+    <select id="yearOfMonthSale" resultMap="BaseMap">
+        -- 全年月份销售额
+        select month(PlanAcceptedDateTime) keys,
+               sum(ActualAmount)           value
+        from C_Order o
+        where year(PlanAcceptedDateTime) = year(getdate())
+        group by month(PlanAcceptedDateTime);
+    </select>
 
-<!--    <select id="YearMonthSale">-->
-<!--        &#45;&#45; 全年月份销售额-->
-<!--        select month(PlanAcceptedDateTime) 月份,-->
-<!--               sum(ActualAmount)           销售额-->
-<!--        from C_Order o-->
-<!--        where year(PlanAcceptedDateTime) = year(getdate())-->
-<!--        group by month(PlanAcceptedDateTime);-->
-<!--    </select>-->
+    <select id="orderTypeSale" resultMap="BaseMap">
+        -- 上月订单品类销售额
+        select ot.OrderTypeName  keys,
+               sum(ActualAmount) value
+        from C_Order o
+                 left join C_OrderType ot on o.OrderType = ot.Id
+        where year(PlanAcceptedDateTime) = year(getdate())
+          and month(PlanAcceptedDateTime) = month(dateadd(mm, -1, getdate()))
+        group by ot.OrderTypeName;
+    </select>
 
-<!--    <select id="typeSale">-->
-<!--        &#45;&#45; 上月订单品类销售额-->
-<!--        select ot.OrderTypeName  品类,-->
-<!--               sum(ActualAmount) 销售额-->
-<!--        from C_Order o-->
-<!--                 left join C_OrderType ot on o.OrderType = ot.Id-->
-<!--        where year(PlanAcceptedDateTime) = year(getdate())-->
-<!--          and month(PlanAcceptedDateTime) = month(dateadd(mm, -1, getdate()))-->
-<!--        group by ot.OrderTypeName;-->
-<!--    </select>-->
-
-<!--    <select id="dealerSale">-->
-<!--        &#45;&#45; 经销商销售排名-->
-<!--        select top(10) d.Name as 经销商名称, sum(ActualAmount) 销售额-->
-<!--        from C_Order o-->
-<!--                 left join C_Dealer d on o.DealerId = d.Id-->
-<!--        where year(PlanAcceptedDateTime) = year(getdate())-->
-<!--          and month(PlanAcceptedDateTime) = month(dateadd(mm, -1, getdate()))-->
-<!--        group by d.Name-->
-<!--        order by sum(ActualAmount) desc;-->
-
-<!--    </select>-->
-
+    <select id="dealerSale" resultMap="BaseMap">
+        -- 经销商销售排名
+        select top (10) d.Name            keys,
+                        sum(ActualAmount) value
+        from C_Order o
+                 left join C_Dealer d on o.DealerId = d.Id
+        where year(PlanAcceptedDateTime) = year(getdate())
+          and month(PlanAcceptedDateTime) = month(dateadd(mm, -1, getdate()))
+        group by d.Name
+        order by sum(ActualAmount) desc;
+    </select>
 
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

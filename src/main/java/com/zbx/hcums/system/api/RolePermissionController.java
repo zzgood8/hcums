@@ -21,12 +21,18 @@ public class RolePermissionController {
         this.rolePermissionService = rolePermissionService;
     }
 
+    /**
+     * 给角色添加一个权限
+     */
     @PostMapping
     public Result<?> post(@Validated @RequestBody RolePermissionForm params) {
         rolePermissionService.addOne(params.getRoleId(), params.getPermissionId());
         return Result.success();
     }
 
+    /**
+     * 删除角色的一个权限
+     */
     @DeleteMapping
     public Result<?> delete(@Validated @RequestBody RolePermissionForm params) {
         rolePermissionService.removeOne(params.getRoleId(), params.getPermissionId());

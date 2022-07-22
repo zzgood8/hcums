@@ -7,8 +7,8 @@ package com.zbx.hcums.system.service;
  **/
 public interface IRolePermissionService {
 
-    void addOne(Long roleId, Long PermissionId);
+    void addOne(Long roleId, Long permissionId);
 
-    void removeOne(Long roleId, Long PermissionId);
+    void removeOne(Long roleId, Long permissionId);
 
 }

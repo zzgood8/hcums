@@ -46,8 +46,6 @@ public class UserController {
 
     /**
      * 新增用户
-     * @param userPostForm
-     * @return
      */
     @PostMapping()
     public Result<?> post(UserPostForm userPostForm) {

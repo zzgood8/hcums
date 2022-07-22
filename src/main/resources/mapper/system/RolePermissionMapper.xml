@@ -20,6 +20,11 @@
         from A_role_permission
         where permission_id = #{permissionId}
     </delete>
+    <delete id="deleteByRoleId">
+        delete
+        from A_role_permission
+        where role_id = #{roleId}
+    </delete>
 
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.zbx.hcums.system.entity.po.RolePermissionPo">
         insert into A_role_permission

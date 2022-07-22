@@ -3,6 +3,8 @@ package com.zbx.hcums.system.dao;
 import com.zbx.hcums.system.entity.po.RolePo;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
 * @author Administrator
 * @description 针对表【A_role(系统角色表)】的数据库操作Mapper
@@ -12,11 +14,15 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface RoleMapper {
 
+    List<RolePo> selectAll();
+
     RolePo selectById(Long id);
 
-    int insert(RolePo record);
+    boolean exists(String roleName);
 
-    int updateById(RolePo record);
+    void insert(RolePo record);
 
-    int deleteById(Long id);
+    void updateById(RolePo record);
+
+    void deleteById(Long id);
 }

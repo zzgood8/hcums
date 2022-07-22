@@ -11,6 +11,4 @@ public interface IUserRoleService {
 
     void removeOne(Long userId, Long roleId);
 
-    void removeByRoleId(Long roleId);
-
 }
