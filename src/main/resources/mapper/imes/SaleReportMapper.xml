@@ -64,7 +64,7 @@
         select N'今日'             keys,
                sum(ActualAmount) value
         from C_Order o
-        where PlanAcceptedDateTime >= CONVERT(varchar(100), GETDATE(), 23);
+        where FinanceApprovedDateTime >= CONVERT(varchar(100), GETDATE(), 23);
     </select>
 
     <select id="yearOfMonthSale" resultMap="BaseMap">

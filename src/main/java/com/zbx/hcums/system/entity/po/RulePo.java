@@ -5,65 +5,50 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * 系统用户
- * @TableName system_user
+ * 权限规则
+ * @TableName system_rule
  */
 @Data
-public class UserPo implements Serializable {
+public class RulePo implements Serializable {
     /**
      * id
      */
     private Long id;
 
     /**
-     * 用户名
+     * 父id
      */
-    private String username;
+    private Long pid;
 
     /**
-     * 昵称
+     * 规则名称
      */
-    private String nickname;
+    private String name;
 
     /**
-     * 头像
+     * 规则路径
      */
-    private String avatar;
+    private String path;
 
     /**
-     * 邮箱
+     * 类型:menuSub=菜单目录,menuItem=菜单项,permission=权限
      */
-    private String email;
+    private Object type;
 
     /**
-     * 手机
+     * 方法:get=查询,post=新增,put=修改,delete=删除
      */
-    private String mobile;
+    private Object method;
 
     /**
-     * 登录失败次数
+     * 权重(排序)
      */
-    private Integer loginFailure;
+    private Integer weigh;
 
     /**
-     * 登录时间
+     * 备注
      */
-    private Date lastLoginTime;
-
-    /**
-     * 登录IP
-     */
-    private String lastLoginIp;
-
-    /**
-     * 密码
-     */
-    private String password;
-
-    /**
-     * 签名
-     */
-    private String motto;
+    private String remark;
 
     /**
      * 创建时间

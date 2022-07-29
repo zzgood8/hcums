@@ -5,10 +5,7 @@ package com.zbx.hcums.system.service;
  * @date 2022/7/29
  * @describe
  **/
-public interface IUserService {
+public interface IRuleService {
 
     // 增、删、改、查
-
-    // 给用户添加、删除分组
-
 }

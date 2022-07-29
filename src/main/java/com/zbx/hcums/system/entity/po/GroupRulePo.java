@@ -5,25 +5,25 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * 用户权限表
- * @TableName A_user_permission
+ * 分组权限映射表
+ * @TableName system_group_rule
  */
 @Data
-public class UserPermissionPo implements Serializable {
+public class GroupRulePo implements Serializable {
     /**
-     * 唯一id
+     * id
      */
     private Long id;
 
     /**
-     * 用户id
+     * 组id
      */
-    private Long userId;
+    private Long groupId;
 
     /**
-     * 权限id
+     * 规则id
      */
-    private Long permissionId;
+    private Long ruleId;
 
     /**
      * 创建时间
@@ -43,7 +43,7 @@ public class UserPermissionPo implements Serializable {
     /**
      * 更新人
      */
-    private String updateBy;
+    private Date updateBy;
 
     private static final long serialVersionUID = 1L;
 }

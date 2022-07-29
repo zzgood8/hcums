@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zbx.hcums.sys.dao.RuleMapper">
+
+    <resultMap id="BaseResultMap" type="com.zbx.hcums.system.entity.po.RulePo">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="pid" column="pid" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="path" column="path" jdbcType="VARCHAR"/>
+            <result property="type" column="type" jdbcType="OTHER"/>
+            <result property="method" column="method" jdbcType="OTHER"/>
+            <result property="weigh" column="weigh" jdbcType="INTEGER"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="TIMESTAMP"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,pid,name,
+        path,type,method,
+        weigh,remark,create_time,
+        create_by,update_time,update_by,
+        status
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from system_rule
+        where  id = #{id,jdbcType=BIGINT} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from system_rule
+        where  id = #{id,jdbcType=BIGINT} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.zbx.hcums.system.entity.po.RulePo" useGeneratedKeys="true">
+        insert into system_rule
+        ( id,pid,name
+        ,path,type,method
+        ,weigh,remark,create_time
+        ,create_by,update_time,update_by
+        ,status)
+        values (#{id,jdbcType=BIGINT},#{pid,jdbcType=BIGINT},#{name,jdbcType=VARCHAR}
+        ,#{path,jdbcType=VARCHAR},#{type,jdbcType=OTHER},#{method,jdbcType=OTHER}
+        ,#{weigh,jdbcType=INTEGER},#{remark,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP}
+        ,#{createBy,jdbcType=VARCHAR},#{updateTime,jdbcType=TIMESTAMP},#{updateBy,jdbcType=TIMESTAMP}
+        ,#{status,jdbcType=TINYINT})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.zbx.hcums.system.entity.po.RulePo" useGeneratedKeys="true">
+        insert into system_rule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="pid != null">pid,</if>
+                <if test="name != null">name,</if>
+                <if test="path != null">path,</if>
+                <if test="type != null">type,</if>
+                <if test="method != null">method,</if>
+                <if test="weigh != null">weigh,</if>
+                <if test="remark != null">remark,</if>
+                <if test="createTime != null">create_time,</if>
+                <if test="createBy != null">create_by,</if>
+                <if test="updateTime != null">update_time,</if>
+                <if test="updateBy != null">update_by,</if>
+                <if test="status != null">status,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=BIGINT},</if>
+                <if test="pid != null">#{pid,jdbcType=BIGINT},</if>
+                <if test="name != null">#{name,jdbcType=VARCHAR},</if>
+                <if test="path != null">#{path,jdbcType=VARCHAR},</if>
+                <if test="type != null">#{type,jdbcType=OTHER},</if>
+                <if test="method != null">#{method,jdbcType=OTHER},</if>
+                <if test="weigh != null">#{weigh,jdbcType=INTEGER},</if>
+                <if test="remark != null">#{remark,jdbcType=VARCHAR},</if>
+                <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+                <if test="createBy != null">#{createBy,jdbcType=VARCHAR},</if>
+                <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+                <if test="updateBy != null">#{updateBy,jdbcType=TIMESTAMP},</if>
+                <if test="status != null">#{status,jdbcType=TINYINT},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zbx.hcums.system.entity.po.RulePo">
+        update system_rule
+        <set>
+                <if test="pid != null">
+                    pid = #{pid,jdbcType=BIGINT},
+                </if>
+                <if test="name != null">
+                    name = #{name,jdbcType=VARCHAR},
+                </if>
+                <if test="path != null">
+                    path = #{path,jdbcType=VARCHAR},
+                </if>
+                <if test="type != null">
+                    type = #{type,jdbcType=OTHER},
+                </if>
+                <if test="method != null">
+                    method = #{method,jdbcType=OTHER},
+                </if>
+                <if test="weigh != null">
+                    weigh = #{weigh,jdbcType=INTEGER},
+                </if>
+                <if test="remark != null">
+                    remark = #{remark,jdbcType=VARCHAR},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="createBy != null">
+                    create_by = #{createBy,jdbcType=VARCHAR},
+                </if>
+                <if test="updateTime != null">
+                    update_time = #{updateTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="updateBy != null">
+                    update_by = #{updateBy,jdbcType=TIMESTAMP},
+                </if>
+                <if test="status != null">
+                    status = #{status,jdbcType=TINYINT},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zbx.hcums.system.entity.po.RulePo">
+        update system_rule
+        set 
+            pid =  #{pid,jdbcType=BIGINT},
+            name =  #{name,jdbcType=VARCHAR},
+            path =  #{path,jdbcType=VARCHAR},
+            type =  #{type,jdbcType=OTHER},
+            method =  #{method,jdbcType=OTHER},
+            weigh =  #{weigh,jdbcType=INTEGER},
+            remark =  #{remark,jdbcType=VARCHAR},
+            create_time =  #{createTime,jdbcType=TIMESTAMP},
+            create_by =  #{createBy,jdbcType=VARCHAR},
+            update_time =  #{updateTime,jdbcType=TIMESTAMP},
+            update_by =  #{updateBy,jdbcType=TIMESTAMP},
+            status =  #{status,jdbcType=TINYINT}
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+</mapper>

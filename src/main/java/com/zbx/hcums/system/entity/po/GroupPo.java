@@ -5,18 +5,18 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * 系统角色表
- * @TableName A_role
+ * 用户分组表
+ * @TableName system_group
  */
 @Data
-public class RolePo implements Serializable {
+public class GroupPo implements Serializable {
     /**
-     * 角色id
+     * id
      */
     private Long id;
 
     /**
-     * 角色名
+     * 分组名称
      */
     private String name;
 
@@ -38,7 +38,12 @@ public class RolePo implements Serializable {
     /**
      * 更新人
      */
-    private String updateBy;
+    private Date updateBy;
+
+    /**
+     * 状态:0=禁用,1=启用
+     */
+    private Integer status;
 
     private static final long serialVersionUID = 1L;
 }

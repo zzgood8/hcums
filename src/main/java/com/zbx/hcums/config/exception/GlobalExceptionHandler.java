@@ -9,6 +9,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.ConstraintViolationException;
+import javax.validation.ValidationException;
 import java.util.List;
 
 /**
@@ -35,6 +37,12 @@ public class GlobalExceptionHandler {
             log.info("参数校验错误: {} => {}", errorMessage.getField(), errorMessage.getDefaultMessage());
         }
         return Result.ofStatus(CommonStatusCode.PARAM_ERROR, sb.toString());
+    }
+
+    @ExceptionHandler(ValidationException.class)
+    public Result<?> handlerException(ValidationException e) {
+        log.info("参数校验错误: {}", e.getMessage());
+        return Result.ofStatus(CommonStatusCode.PARAM_ERROR, e.getMessage());
     }
 
     @ExceptionHandler()

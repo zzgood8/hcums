@@ -2,118 +2,170 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zbx.hcums.system.dao.UserMapper">
+<mapper namespace="com.zbx.hcums.sys.dao.UserMapper">
 
     <resultMap id="BaseResultMap" type="com.zbx.hcums.system.entity.po.UserPo">
-        <id property="id" column="id" jdbcType="BIGINT"/>
-        <result property="name" column="name" jdbcType="VARCHAR"/>
-        <result property="username" column="username" jdbcType="VARCHAR"/>
-        <result property="avatar" column="avatar"/>
-        <result property="password" column="password" jdbcType="VARCHAR"/>
-        <result property="isEnable" column="is_enable" jdbcType="TINYINT"/>
-        <result property="isLock" column="is_lock" jdbcType="TINYINT"/>
-        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
-        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
-    </resultMap>
-
-    <resultMap id="UserVoMap" type="com.zbx.hcums.system.entity.vo.UserVo">
-        <id property="id" column="id" jdbcType="BIGINT"/>
-        <result property="name" column="name" jdbcType="VARCHAR"/>
-        <result property="username" column="username" jdbcType="VARCHAR"/>
-        <result property="avatar" column="avatar"/>
-        <result property="password" column="password" jdbcType="VARCHAR"/>
-        <result property="isEnable" column="is_enable" jdbcType="TINYINT"/>
-        <result property="isLock" column="is_lock" jdbcType="TINYINT"/>
-        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
-        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
-        <collection property="roles" ofType="string">
-            <result column="role"/>
-        </collection>
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="username" column="username" jdbcType="VARCHAR"/>
+            <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+            <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+            <result property="email" column="email" jdbcType="VARCHAR"/>
+            <result property="mobile" column="mobile" jdbcType="VARCHAR"/>
+            <result property="loginFailure" column="login_failure" jdbcType="TINYINT"/>
+            <result property="lastLoginTime" column="last_login_time" jdbcType="TIMESTAMP"/>
+            <result property="lastLoginIp" column="last_login_ip" jdbcType="VARCHAR"/>
+            <result property="password" column="password" jdbcType="VARCHAR"/>
+            <result property="motto" column="motto" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="TIMESTAMP"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,name,username,avatar,
-        password,is_enable,is_lock,
-        create_time,create_by,update_time,
-        update_by
+        id,username,nickname,
+        avatar,email,mobile,
+        login_failure,last_login_time,last_login_ip,
+        password,motto,create_time,
+        create_by,update_time,update_by,
+        status
     </sql>
 
-    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from A_user
-        where id = #{id,jdbcType=BIGINT}
+        <include refid="Base_Column_List" />
+        from system_user
+        where  id = #{id,jdbcType=BIGINT} 
     </select>
 
-    <select id="selectByUsername" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from A_user
-        where username = #{username}
-    </select>
-
-    <select id="selectByParams" resultMap="UserVoMap">
-        select a.id,
-        a.name,
-        a.username,
-        a.password,
-        a.is_enable,
-        a.is_lock,
-        a.create_time,
-        a.create_by,
-        a.update_time,
-        a.update_by,
-        a.avatar,
-        c.name role
-        from A_user a
-        left join A_user_role b on a.id = b.user_id
-        left join A_role c on b.role_id = c.id
-        where 1 = 1
-        <if test="username != null">and a.username like '%${username}%'</if>
-        <if test="name != null">and a.name like '%${name}%'</if>
-        <if test="createBy != null">and a.create_by like '%${createBy}%'</if>
-        <if test="role != null">and c.name like '%${role}%'</if>
-    </select>
-
-    <delete id="deleteById" parameterType="java.lang.Long">
-        delete
-        from A_user
-        where id = #{id,jdbcType=BIGINT}
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from system_user
+        where  id = #{id,jdbcType=BIGINT} 
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.zbx.hcums.system.entity.po.UserPo"
-            useGeneratedKeys="true">
-        insert into A_user
-        ( id, name, username
-        , password, is_enable, is_lock
-        , create_time, create_by, update_time
-        , update_by)
-        values ( #{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}
-               , #{password,jdbcType=VARCHAR}, #{isEnable,jdbcType=TINYINT}, #{isLock,jdbcType=TINYINT}
-               , #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
-               , #{updateBy,jdbcType=VARCHAR})
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.zbx.hcums.system.entity.po.UserPo" useGeneratedKeys="true">
+        insert into system_user
+        ( id,username,nickname
+        ,avatar,email,mobile
+        ,login_failure,last_login_time,last_login_ip
+        ,password,motto,create_time
+        ,create_by,update_time,update_by
+        ,status)
+        values (#{id,jdbcType=BIGINT},#{username,jdbcType=VARCHAR},#{nickname,jdbcType=VARCHAR}
+        ,#{avatar,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{mobile,jdbcType=VARCHAR}
+        ,#{loginFailure,jdbcType=TINYINT},#{lastLoginTime,jdbcType=TIMESTAMP},#{lastLoginIp,jdbcType=VARCHAR}
+        ,#{password,jdbcType=VARCHAR},#{motto,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP}
+        ,#{createBy,jdbcType=VARCHAR},#{updateTime,jdbcType=TIMESTAMP},#{updateBy,jdbcType=TIMESTAMP}
+        ,#{status,jdbcType=TINYINT})
     </insert>
-    <update id="updateById" parameterType="com.zbx.hcums.system.entity.po.UserPo">
-        update A_user
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.zbx.hcums.system.entity.po.UserPo" useGeneratedKeys="true">
+        insert into system_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="username != null">username,</if>
+                <if test="nickname != null">nickname,</if>
+                <if test="avatar != null">avatar,</if>
+                <if test="email != null">email,</if>
+                <if test="mobile != null">mobile,</if>
+                <if test="loginFailure != null">login_failure,</if>
+                <if test="lastLoginTime != null">last_login_time,</if>
+                <if test="lastLoginIp != null">last_login_ip,</if>
+                <if test="password != null">password,</if>
+                <if test="motto != null">motto,</if>
+                <if test="createTime != null">create_time,</if>
+                <if test="createBy != null">create_by,</if>
+                <if test="updateTime != null">update_time,</if>
+                <if test="updateBy != null">update_by,</if>
+                <if test="status != null">status,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=BIGINT},</if>
+                <if test="username != null">#{username,jdbcType=VARCHAR},</if>
+                <if test="nickname != null">#{nickname,jdbcType=VARCHAR},</if>
+                <if test="avatar != null">#{avatar,jdbcType=VARCHAR},</if>
+                <if test="email != null">#{email,jdbcType=VARCHAR},</if>
+                <if test="mobile != null">#{mobile,jdbcType=VARCHAR},</if>
+                <if test="loginFailure != null">#{loginFailure,jdbcType=TINYINT},</if>
+                <if test="lastLoginTime != null">#{lastLoginTime,jdbcType=TIMESTAMP},</if>
+                <if test="lastLoginIp != null">#{lastLoginIp,jdbcType=VARCHAR},</if>
+                <if test="password != null">#{password,jdbcType=VARCHAR},</if>
+                <if test="motto != null">#{motto,jdbcType=VARCHAR},</if>
+                <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+                <if test="createBy != null">#{createBy,jdbcType=VARCHAR},</if>
+                <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+                <if test="updateBy != null">#{updateBy,jdbcType=TIMESTAMP},</if>
+                <if test="status != null">#{status,jdbcType=TINYINT},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zbx.hcums.system.entity.po.UserPo">
+        update system_user
         <set>
-            <if test="name != null">
-                name = #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="password != null">
-                password = #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="isEnable != null">
-                is_enable = #{isEnable,jdbcType=TINYINT},
-            </if>
-            <if test="isLock != null">
-                is_lock = #{isLock,jdbcType=TINYINT},
-            </if>
-            update_time = #{updateTime,jdbcType=TIMESTAMP},
-            update_by = #{updateBy,jdbcType=VARCHAR}
+                <if test="username != null">
+                    username = #{username,jdbcType=VARCHAR},
+                </if>
+                <if test="nickname != null">
+                    nickname = #{nickname,jdbcType=VARCHAR},
+                </if>
+                <if test="avatar != null">
+                    avatar = #{avatar,jdbcType=VARCHAR},
+                </if>
+                <if test="email != null">
+                    email = #{email,jdbcType=VARCHAR},
+                </if>
+                <if test="mobile != null">
+                    mobile = #{mobile,jdbcType=VARCHAR},
+                </if>
+                <if test="loginFailure != null">
+                    login_failure = #{loginFailure,jdbcType=TINYINT},
+                </if>
+                <if test="lastLoginTime != null">
+                    last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="lastLoginIp != null">
+                    last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+                </if>
+                <if test="password != null">
+                    password = #{password,jdbcType=VARCHAR},
+                </if>
+                <if test="motto != null">
+                    motto = #{motto,jdbcType=VARCHAR},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="createBy != null">
+                    create_by = #{createBy,jdbcType=VARCHAR},
+                </if>
+                <if test="updateTime != null">
+                    update_time = #{updateTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="updateBy != null">
+                    update_by = #{updateBy,jdbcType=TIMESTAMP},
+                </if>
+                <if test="status != null">
+                    status = #{status,jdbcType=TINYINT},
+                </if>
         </set>
-        where id = #{id,jdbcType=BIGINT}
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zbx.hcums.system.entity.po.UserPo">
+        update system_user
+        set 
+            username =  #{username,jdbcType=VARCHAR},
+            nickname =  #{nickname,jdbcType=VARCHAR},
+            avatar =  #{avatar,jdbcType=VARCHAR},
+            email =  #{email,jdbcType=VARCHAR},
+            mobile =  #{mobile,jdbcType=VARCHAR},
+            login_failure =  #{loginFailure,jdbcType=TINYINT},
+            last_login_time =  #{lastLoginTime,jdbcType=TIMESTAMP},
+            last_login_ip =  #{lastLoginIp,jdbcType=VARCHAR},
+            password =  #{password,jdbcType=VARCHAR},
+            motto =  #{motto,jdbcType=VARCHAR},
+            create_time =  #{createTime,jdbcType=TIMESTAMP},
+            create_by =  #{createBy,jdbcType=VARCHAR},
+            update_time =  #{updateTime,jdbcType=TIMESTAMP},
+            update_by =  #{updateBy,jdbcType=TIMESTAMP},
+            status =  #{status,jdbcType=TINYINT}
+        where   id = #{id,jdbcType=BIGINT} 
     </update>
 </mapper>

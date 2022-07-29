@@ -5,35 +5,25 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * 系统权限表
- * @TableName A_permission
+ * 用户分组映射表
+ * @TableName system_user_group
  */
 @Data
-public class PermissionPo implements Serializable {
+public class UserGroupPo implements Serializable {
     /**
-     * 权限id
+     * id
      */
     private Long id;
 
     /**
-     * 权限名
+     * 用户id
      */
-    private String name;
+    private Long userId;
 
     /**
-     * 权限路径
+     * 分组id
      */
-    private String path;
-
-    /**
-     * 是否菜单权限
-     */
-    private Boolean isMenu;
-
-    /**
-     * 权限父类
-     */
-    private Long parentId;
+    private Long groupId;
 
     /**
      * 创建时间
@@ -53,7 +43,7 @@ public class PermissionPo implements Serializable {
     /**
      * 更新人
      */
-    private String updateBy;
+    private Date updateBy;
 
     private static final long serialVersionUID = 1L;
 }

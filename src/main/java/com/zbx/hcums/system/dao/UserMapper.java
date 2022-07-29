@@ -1,32 +1,25 @@
 package com.zbx.hcums.system.dao;
 
-import com.zbx.hcums.system.entity.form.UserGetForm;
-import com.zbx.hcums.system.entity.form.UserPostForm;
 import com.zbx.hcums.system.entity.po.UserPo;
-import com.zbx.hcums.system.entity.vo.UserVo;
-import org.apache.ibatis.annotations.Mapper;
-
-import java.util.List;
 
 /**
 * @author Administrator
-* @description 针对表【A_user(用户信息表)】的数据库操作Mapper
-* @createDate 2022-07-18 10:11:36
-* @Entity com.zbx.hcums.system.entity.po.UserPo
+* @description 针对表【system_user(系统用户)】的数据库操作Mapper
+* @createDate 2022-07-29 11:14:21
+* @Entity com.zbx.hcums.sys.entity.po.UserPo
 */
-@Mapper
 public interface UserMapper {
 
-    UserPo selectById(Long id);
-
-    UserPo selectByUsername(String username);
-
-    List<UserVo> selectByParams(UserGetForm params);
-
-    int deleteById(Long id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(UserPo record);
 
-    int updateById(UserPo record);
+    int insertSelective(UserPo record);
+
+    UserPo selectByPrimaryKey(Long id);
+
+    int updateByPrimaryKeySelective(UserPo record);
+
+    int updateByPrimaryKey(UserPo record);
 
 }

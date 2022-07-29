@@ -1,8 +1,8 @@
 package com.zbx.hcums.common.res;
 
+import cn.hutool.core.date.DateUtil;
 import com.zbx.hcums.common.status.CommonStatusCode;
 import com.zbx.hcums.common.status.IStatusCode;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -11,7 +11,6 @@ import lombok.Data;
  * @describe
  **/
 @Data
-@AllArgsConstructor
 public class Result<T> {
 
     private int code;
@@ -19,6 +18,14 @@ public class Result<T> {
     private String msg;
 
     private T data;
+
+    private long time = DateUtil.currentSeconds();
+
+    public Result(int code, String msg, T data) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+    }
 
     public static <T> Result<T> success() {
         return success(null);

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zbx.hcums.sys.dao.UserGroupMapper">
+
+    <resultMap id="BaseResultMap" type="com.zbx.hcums.system.entity.po.UserGroupPo">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="userId" column="user_id" jdbcType="BIGINT"/>
+            <result property="groupId" column="group_id" jdbcType="BIGINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_id,group_id,
+        create_time,create_by,update_time,
+        update_by
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from system_user_group
+        where  id = #{id,jdbcType=BIGINT} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from system_user_group
+        where  id = #{id,jdbcType=BIGINT} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.zbx.hcums.system.entity.po.UserGroupPo" useGeneratedKeys="true">
+        insert into system_user_group
+        ( id,user_id,group_id
+        ,create_time,create_by,update_time
+        ,update_by)
+        values (#{id,jdbcType=BIGINT},#{userId,jdbcType=BIGINT},#{groupId,jdbcType=BIGINT}
+        ,#{createTime,jdbcType=TIMESTAMP},#{createBy,jdbcType=VARCHAR},#{updateTime,jdbcType=TIMESTAMP}
+        ,#{updateBy,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.zbx.hcums.system.entity.po.UserGroupPo" useGeneratedKeys="true">
+        insert into system_user_group
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="userId != null">user_id,</if>
+                <if test="groupId != null">group_id,</if>
+                <if test="createTime != null">create_time,</if>
+                <if test="createBy != null">create_by,</if>
+                <if test="updateTime != null">update_time,</if>
+                <if test="updateBy != null">update_by,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=BIGINT},</if>
+                <if test="userId != null">#{userId,jdbcType=BIGINT},</if>
+                <if test="groupId != null">#{groupId,jdbcType=BIGINT},</if>
+                <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+                <if test="createBy != null">#{createBy,jdbcType=VARCHAR},</if>
+                <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+                <if test="updateBy != null">#{updateBy,jdbcType=TIMESTAMP},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zbx.hcums.system.entity.po.UserGroupPo">
+        update system_user_group
+        <set>
+                <if test="userId != null">
+                    user_id = #{userId,jdbcType=BIGINT},
+                </if>
+                <if test="groupId != null">
+                    group_id = #{groupId,jdbcType=BIGINT},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="createBy != null">
+                    create_by = #{createBy,jdbcType=VARCHAR},
+                </if>
+                <if test="updateTime != null">
+                    update_time = #{updateTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="updateBy != null">
+                    update_by = #{updateBy,jdbcType=TIMESTAMP},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zbx.hcums.system.entity.po.UserGroupPo">
+        update system_user_group
+        set 
+            user_id =  #{userId,jdbcType=BIGINT},
+            group_id =  #{groupId,jdbcType=BIGINT},
+            create_time =  #{createTime,jdbcType=TIMESTAMP},
+            create_by =  #{createBy,jdbcType=VARCHAR},
+            update_time =  #{updateTime,jdbcType=TIMESTAMP},
+            update_by =  #{updateBy,jdbcType=TIMESTAMP}
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+</mapper>
