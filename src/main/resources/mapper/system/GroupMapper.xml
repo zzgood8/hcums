@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zbx.hcums.sys.dao.GroupMapper">
+<mapper namespace="com.zbx.hcums.system.dao.GroupMapper">
 
     <resultMap id="BaseResultMap" type="com.zbx.hcums.system.entity.po.GroupPo">
             <id property="id" column="id" jdbcType="BIGINT"/>

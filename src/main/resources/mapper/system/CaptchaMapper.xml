@@ -27,6 +27,11 @@
         where `key` = #{key}
     </delete>
 
+    <delete id="deleteByExpireTime">
+        delete from system_captcha
+        where `expire_time` &lt;= #{time}
+    </delete>
+
     <insert id="insert" parameterType="com.zbx.hcums.system.entity.po.CaptchaPo">
         insert into system_captcha
         (`key`,`code`,`create_time`,`expire_time`)

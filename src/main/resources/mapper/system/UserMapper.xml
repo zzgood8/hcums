@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zbx.hcums.sys.dao.UserMapper">
+<mapper namespace="com.zbx.hcums.system.dao.UserMapper">
 
     <resultMap id="BaseResultMap" type="com.zbx.hcums.system.entity.po.UserPo">
             <id property="id" column="id" jdbcType="BIGINT"/>
@@ -37,6 +37,13 @@
         <include refid="Base_Column_List" />
         from system_user
         where  id = #{id,jdbcType=BIGINT} 
+    </select>
+
+    <select id="selectByUsername" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from system_user
+        where `username` = #{username}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
@@ -168,4 +175,17 @@
             status =  #{status,jdbcType=TINYINT}
         where   id = #{id,jdbcType=BIGINT} 
     </update>
+
+    <update id="setLoginFailure">
+        update system_user
+        set login_failure = login_failure + 1
+        where id = #{id}
+    </update>
+
+    <update id="clearLoginFailure">
+        update system_user
+        set login_failure = 0
+        where id = #{id}
+    </update>
+
 </mapper>

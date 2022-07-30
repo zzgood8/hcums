@@ -88,7 +88,7 @@ public class UserPo implements Serializable {
     /**
      * 状态:0=禁用,1=启用
      */
-    private Integer status;
+    private Boolean status;
 
     private static final long serialVersionUID = 1L;
 }

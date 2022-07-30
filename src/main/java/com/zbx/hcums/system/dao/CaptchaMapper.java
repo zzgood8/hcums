@@ -18,4 +18,6 @@ public interface CaptchaMapper {
 
     void deleteByKey(String key);
 
+    void deleteByExpireTime(Long time);
+
 }
